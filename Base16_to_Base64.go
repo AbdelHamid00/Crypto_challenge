@@ -24,7 +24,7 @@ var (
 )
 
 func main() {
-	var base16 string = "0X1"
+	var base16 string = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
 	var err error
 	// make the base16 string all Uppercase
 	base16 = strings.ToUpper(base16)
@@ -38,7 +38,7 @@ func main() {
 	for length := 3 - len(base16) % 3; length > 0; length-- {
 		base16 = "0" + base16
 	}
-	fmt.Printf("the base16 string : %s\n", base16)
+	// fmt.Printf("the base16 string : %s\n", base16)
 	// initialize the maps  (rune -> binary representation) 
 	//for the map16 , rune -> 4 runes
 	// and the opposite for the map64 , 6runes -> rune 
@@ -88,7 +88,7 @@ func hx_to_binary(base16 string) string {
 	for  _, char := range base16 {
 		binaryString += map16[char]
 	}
-	fmt.Printf("the binary representation : %s\n", binaryString)
+	// fmt.Printf("the binary representation : %s\n", binaryString)
 	return binaryString
 }
 
@@ -96,12 +96,10 @@ func hex_to_base64(binaryString string) string {
 	var base64 string
 	for i := 0; i < len(binaryString); i += 6 {
 		base64 += string(map64[binaryString[i:i+6]])
-		fmt.Println(binaryString[i:i+6])
-		fmt.Println(map64[binaryString[i:i+6]])
-		fmt.Println(base64)
 	}
 	// You can Add a little "for loop" here to remove the Zeros in the left of the base64 string
 	// the zeros in this case are 'A'
 
 	// I prefere not .
+	return base64
 }
