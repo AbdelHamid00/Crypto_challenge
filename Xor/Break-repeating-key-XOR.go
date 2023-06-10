@@ -37,15 +37,15 @@ func GetTheScore(input []byte, KeySize int) float64 {
 
 	Blocks[0] = string(input[0:KeySize])
 	Blocks[1] = string(input[KeySize:KeySize*2])
-	Blocks[2] = string(input[KeySize*2:KeySize*3])
-	Blocks[3] = string(input[KeySize*3:KeySize*4])
-	Blocks[4] = string(input[KeySize*4:KeySize*5])
-	Blocks[5] = string(input[KeySize*5:KeySize*6])
-	Blocks[6] = string(input[KeySize*6:KeySize*7])
-	Blocks[7] = string(input[KeySize*7:KeySize*8])
+	// Blocks[2] = string(input[KeySize*2:KeySize*3])
+	// Blocks[3] = string(input[KeySize*3:KeySize*4])
+	// Blocks[4] = string(input[KeySize*4:KeySize*5])
+	// Blocks[5] = string(input[KeySize*5:KeySize*6])
+	// Blocks[6] = string(input[KeySize*6:KeySize*7])
+	// Blocks[7] = string(input[KeySize*7:KeySize*8])
 	k := 0
-	for i := 0; i < 8; i++ {
-		for j := i + 1; j < 8; j++ {
+	for i := 0; i < 2; i++ {
+		for j := i + 1; j < 2; j++ {
 			k++
 			sum += float64(HammigDestance(Blocks[i], Blocks[j]))
 		}

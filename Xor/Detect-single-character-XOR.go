@@ -1,7 +1,7 @@
 package Xor
 
 import (
-	"encoding/hex"
+	// "encoding/hex"
 	"math"
 	"strings"
 	// "bytes"
@@ -48,11 +48,12 @@ func GetTheBestScoreForOne(hexstring string) (minScore float64, plaintext string
 func DetectSingleCharXOR(lines []string) (plaintext string, Key byte, err error) {
 	minScore := float64(math.Inf(1))
 	for i := 0; i < len(lines); i++ {
-		plaintextBytes , err := hex.DecodeString(lines[i])
-		if err != nil {
-			return plaintext, Key, err
-		}
-		score, Replaintext, ReKey := GetTheBestScoreForOne(string(plaintextBytes))
+		// plaintextBytes , err := hex.DecodeString(lines[i])
+		// if err != nil {
+		// 	return plaintext, Key, err
+		// }
+
+		score, Replaintext, ReKey := GetTheBestScoreForOne(lines[i])
 		if score < minScore {
 			minScore = score
 			plaintext = Replaintext
