@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Cryptopals/Xor"
-	// "Cryptopals/AES"
+	// "Cryptopals/Xor"
+	"Cryptopals/AES"
 	"encoding/base64"
 	// "io/ioutil"
 	// // "os"
@@ -17,15 +17,32 @@ func main() {
 	// if err != nil {
 	// 	log.Fatal(err)
 	// }
-	// key := string("YELLOW SUBMARINE")
+	// The Keys should be encoded in base64
+
+	text := []byte("abc")
+	key := []byte("YELLOW SUBMARINE")
+	content := base64.StdEncoding.EncodeToString(text)
+
+	Encrypted , err := AES.Aes128Encryption(string(content), key)
+	if err != nil {
+		fmt.Println(err)
+		return 
+	}
+	fmt.Println(string(base64.StdEncoding.EncodeToString(Encrypted)))
 	// fmt.Printf("File contents:\n%s\n", string(content))
 	// AES.Aes128Encryption(content, key)
-	input := string("ecPEJPcAsWTfb9SBuvIQxUK2vo1FsiGsDyVR82jlaFJ+N2tLrrunDyUzRDP2sP2QQ/VSgm6o7260zD04FyhpTNeY9VEciVVY+uK5tviDI6MgIv2aCTp9zDs7rHmgAQdKqZFtp2JxHzx3ftZ3hER9BdHEc+bF3Y0YeXAoz0m43YOwG6+jTX+x6ItKe7CncMQDq3IOtyr0FvIqzdFhieSDDQ==")
-	Plaintext, err := base64.StdEncoding.DecodeString(string(input))
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(Plaintext)
-	result := Xor.RepeatingKeyXOR(Plaintext, []byte("s"))
-	fmt.Println(string(result))
+	// input := string("TslNiU11yhtK0ki2nZ2TkzUuCwrzQ8uEfcVlDdvmNrvru0qwqCsLBNBwbn9gezAy4FQ/j16eeFbWJDxE5wgT3PQ7h0TheN5uBtyN+inxXlNqChF+AhNAfTcRtxe74wpKpn3dOlXhQMerq/swrtsa66m7vWwezOkf+Dy7Ezs0vexhPUdjw9PKcK4F3+hUQb0G0P91vx0tUiF6itmYAGLjiw==")
+	// key := string("A4+TGuUSoMqGhyxPgx4fJg==")
+	// Plaintext, err := base64.StdEncoding.DecodeString(input)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// PlainKey, errr := base64.StdEncoding.DecodeString(key)
+	// if errr != nil {
+	// 	panic(err)
+	// }
+	
+	// fmt.Println(string(Plaintext))
+	// result := Xor.RepeatingKeyXOR(Plaintext, PlainKey)
+	// fmt.Println(string(result))
 }
