@@ -61,7 +61,7 @@ var Matrix = [][]byte{
 func BytesToMatrix(key []byte) [][]byte {
 	keys := make([][]byte, 4)
 	for i := 0; i < 16; i++ {
-		keys[i / 4] = append(keys[i / 4], key[i])
+		keys[i % 4] = append(keys[i % 4], key[i])
 	}
 	for i := 0; i < 4; i++ {
 		for j := 4; j < 44; j++ {
@@ -74,7 +74,7 @@ func BytesToMatrix(key []byte) [][]byte {
 func TextToMatrix(Plaintext []byte) [][]byte {
 	matrix := make([][]byte, 4)
 	for i := 0; i < 16; i++ {
-		matrix[i / 4] = append(matrix[i / 4], Plaintext[i])
+		matrix[i % 4] = append(matrix[i % 4], Plaintext[i])
 	}
 	return matrix
 }
@@ -114,7 +114,7 @@ func	MatrixToText(block [][]byte) []byte {
 	text := make([]byte, 0)
 	for i := 0; i < 4; i++ {
 		for j := 0; j < 4; j++ {
-			text = append(text, block[i][j])
+			text = append(text, block[j][i])
 		}
 	}
 	return text
@@ -204,16 +204,21 @@ func	MixColumns(block [][]byte) [][]byte{
 	for i := 0; i < 4; i++ {
 		result[i] = make([]byte, 4)
 	}
-	kk := int(0)
+	n := int(0)
 	for i := 0; i < 4; i++ {
 		for j := 0; j < 4; j++ {
 			for k := 0; k < 4; k++ {
-				kk += int(block[i][k] * Matrix[k][j])
-				result[i][j] += block[i][k] * Matrix[k][j]
+				if k == 0 {
+					n += int(block[k][i]) * int(Matrix[j][k])
+				} else {
+					n ^= int(block[k][i]) * int(Matrix[j][k])
+				}
 			}
-			if kk > 255 {
-				panic("waaaaaaaaaaa la ")
+			if n > 255 {
+				panic("MAMAMAMAMAMA")
 			}
+			result[i][j] = byte(n)
+			n = 0
 		}
 	}
 	return result
